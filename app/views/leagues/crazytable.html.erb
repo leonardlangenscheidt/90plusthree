@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @league.name %> <%= @league.endyear-1 %>/<%= @league.endyear %></h1>
+
+
+<table class="table">
+  	<thead>
+  		<tr>
+  			<th colspan=4>
+  				Real Tabelle
+  			</th>
+  			<th colspan=4>
+  				Referee
+  			</th>
+  			<th colspan=4>
+  				Hundred
+  			</th>
+  			<th colspan=4>
+  				No Luck
+  			</th>
+  		<tr>
+  			<th>Team</th>
+  			<th>Points</th>
+  			<th>Difference</th>
+  			<th>Scored:Conceded</th>
+  			<th>Team</th>
+  			<th>Points</th>
+  			<th>Difference</th>
+  			<th>Scored:Conceded</th>
+   			<th>Team</th>
+  			<th>Points</th>
+  			<th>Difference</th>
+  			<th>Scored:Conceded</th>
+    		<th>Team</th>
+  			<th>Points</th>
+  			<th>Difference</th>
+  			<th>Scored:Conceded</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  	<% @mastertabelle.each do |place| %>
+	  	<tr>
+	  		<% x = 0 %>
+	  		<td><%= link_to place[x][0], "/teams/#{place[x][5]}" %></td>
+	  		<td><%= place[x][1] %></td>
+	  		<td><%= place[x][2] %></th>
+ 	  		<td><%= place[x][3] %> : <%= place[x][4] %></td>
+
+	  		<% x = 1 %>
+	  		<td><%= link_to place[x][0], "/teams/#{place[x][5]}" %></td>
+	  		<td><%= place[x][1] %></td>
+	  		<td><%= place[x][2] %></th>
+ 	  		<td><%= place[x][3] %> : <%= place[x][4] %></td>
+
+	  		<% x = 2 %>
+	  		<td><%= link_to place[x][0], "/teams/#{place[x][5]}" %></td>
+	  		<td><%= place[x][1] %></td>
+	  		<td><%= place[x][2] %></th>
+ 	  		<td><%= place[x][3] %> : <%= place[x][4] %></td>
+
+	  		<% x = 3 %>
+	  		<td><%= link_to place[x][0], "/teams/#{place[x][5]}" %></td>
+	  		<td><%= place[x][1] %></td>
+	  		<td><%= place[x][2] %></th>
+ 	  		<td><%= place[x][3] %> : <%= place[x][4] %></td>
+	  	</tr>
+  	<% end %>
+  	</tbody>
+</table>

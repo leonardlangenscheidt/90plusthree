@@ -1,0 +1,62 @@
+<h1>New Match</h1>
+
+<%= form_for(@match) do |f| %>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% @match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless @matches.count == 0 %>
+    <div class="field">
+      <%= f.label :league_id %><br>
+      <%= f.select :league_id, League.all.map{|l| [l.name, l.id]}, :value => @matches.last.league_id %>
+    </div>
+    <div class="field">
+      <%= f.label :week %><br>
+      <%= f.number_field :week, :value => @matches.last.week, :min => 1 %>
+      (Last entry was <%= @matches.last.week %>)
+    </div>
+
+  <% else %>
+    <div class="field">
+      <%= f.label :league_id %><br>
+      <%= f.select :league_id, League.all.map{|l| [l.name, l.id]} %>
+    </div>
+    <div class="field">
+      <%= f.label :week %><br>
+      <%= f.number_field :week, :min => 1 %>
+    </div>
+  <%end %>
+
+
+
+  <div class="field">
+    <%= f.label :team_id, "Heimteam" %></br>
+    <%= f.select :team_id, Team.all.map{|t| [t.name, t.id]} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :otherteam_id, "Auswärtsteam" %></br>
+    <%= f.select :otherteam_id, Team.all.map{|t| [t.name, t.id]} %>
+  </div>
+
+
+  <div class="field" style='display:none'>
+    <%= f.label :real_result %></br>
+    <%= f.number_field :real_result, :value => 0 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', matches_path %>

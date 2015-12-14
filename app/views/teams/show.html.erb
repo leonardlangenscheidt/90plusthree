@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @team.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>League</th>
+      <th>Real result</th>
+      <th>Where</th>
+      <th>Against</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team.matches.each do |match| %>
+        <tr>
+          <td><%= match.league.name %></td>
+          <td><%= match.team1goals %> : <%= match.team2goals %></td>
+          <td>
+          	<% if match.mirror == false %>Home
+          	<% else %>Away
+          	<% end %>
+          </td>
+          <td><%= Team.find(match.otherteam_id).name %></td>
+          <td><%= link_to 'Show', match %></td>
+          <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

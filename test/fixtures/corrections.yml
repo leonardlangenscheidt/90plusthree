@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  link: MyString
+  match_id: 1
+  type: 1
+  change: 1
+  minute: 1
+  mirror: false
+
+two:
+  name: MyString
+  link: MyString
+  match_id: 1
+  type: 1
+  change: 1
+  minute: 1
+  mirror: false

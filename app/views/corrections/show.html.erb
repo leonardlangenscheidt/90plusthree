@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @correction.name %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @correction.link %>
+</p>
+
+<p>
+  <strong>Match:</strong>
+  <%= @correction.match_id %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @correction.typeOfCorrection %>
+</p>
+
+<p>
+  <strong>Change:</strong>
+  <%= @correction.change %>
+</p>
+
+<p>
+  <strong>Minute:</strong>
+  <%= @correction.minute %>
+</p>
+
+
+<%= link_to 'Edit', edit_correction_path(@correction) %> |
+<%= link_to 'Back', corrections_path %>

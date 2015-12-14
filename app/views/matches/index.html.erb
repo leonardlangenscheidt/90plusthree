@@ -1,0 +1,93 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Matches</h1>
+<button><%= link_to 'New Match', new_match_path %></button>
+
+
+<% @weeks.each do |week| %>
+
+<h2><%= week %>. Spieltag</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Teams</th>
+      <th>Real result</th>
+      <th>Referee Corrections</th>
+      <th>One Hundred</th>
+      <th>No Luck</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matches.each do |match| %>
+      <% if match.mirror == false && match.week == week %>
+        <tr>
+          <td><%= match.team.name %> vs. <%= Team.find(match.otherteam_id).name %></td>
+          <td>
+            <% match.corrections.each do |c| %>
+              <% if c.typeOfCorrection == 0 %>
+                <% match.real_result += c.change %>
+              <% end %>
+            <% end %>
+            <%= match.team1goals %> : <%= match.team2goals %>
+          </td>
+
+
+          <td>
+            <% @originalscore = match.real_result %>
+            
+            <% match.corrections.each do |c| %>
+              <% if c.typeOfCorrection == 1 %>
+                <% match.real_result += c.change %>
+              <% end %>
+            <% end %>
+            
+            <%= match.team1goals %> : <%= match.team2goals %><br>
+
+            <% match.real_result = @originalscore %>
+          </td>
+
+
+          <td>
+            <% @originalscore = match.real_result %>
+            
+            <% match.corrections.each do |c| %>
+              <% if c.typeOfCorrection == 2 %>
+                <% match.real_result += c.change %>
+              <% end %>
+            <% end %>
+            
+            <%= match.team1goals %> : <%= match.team2goals %><br>
+
+            <% match.real_result = @originalscore %>
+          </td>
+
+
+          <td>
+            <% @originalscore = match.real_result %>
+            
+            <% match.corrections.each do |c| %>
+              <% if c.typeOfCorrection == 3 %>
+                <% match.real_result += c.change %>
+              <% end %>
+            <% end %>
+            
+            <%= match.team1goals %> : <%= match.team2goals %><br>
+
+            <% match.real_result = @originalscore %>
+          </td>
+
+          <td><button><%= link_to "New Correction", new_correction_path(:match_id=>match.id) %></button></td>
+          <td><button><%= link_to 'Show Match Info', match %></button></td>
+<!--           <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ -->        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% end %>
+

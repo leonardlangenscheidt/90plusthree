@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @league.name %> <%= @league.endyear-1 %>/<%= @league.endyear %></h1>
+
+
+<table class="table">
+  	<thead>
+  		<tr>
+  			<th>
+  				Real Tabelle
+  			</th>
+  			<th>
+  				Referee
+  			</th>
+  			<th>
+  				Hundred
+  			</th>
+  			<th>
+  				No Luck
+  			</th>
+
+  	</thead>
+  	<tbody>
+  	<% @position = 1 %>
+  	<% @width = 50 %>
+  	<% @mastertabelle.each do |place| %>
+	  	<tr>
+	  		<% x = 0 %>
+	  		<td>
+	  			<%= @position%>. <img alt="Icon" src="/assets/<%=place[x][5]%>.png" width="<%=@width%>" />
+	  		</td>
+
+	  		<% x = 1 %>
+	  		<td>
+	  			<%= @position%>. <img alt="Icon" src="/assets/<%=place[x][5]%>.png" width="<%=@width%>" />
+	  		</td>
+
+	  		<% x = 2 %>
+	  		<td>
+	  			<%= @position%>. <img alt="Icon" src="/assets/<%=place[x][5]%>.png" width="<%=@width%>" />
+	  		</td>
+
+	  		<% x = 3 %>
+	  		<td>
+	  			<%= @position%>. <img alt="Icon" src="/assets/<%=place[x][5]%>.png" width="<%=@width%>" />
+	  		</td>
+
+	  		<% @position += 1%>
+	  	</tr>
+  	<% end %>
+  	</tbody>
+</table>
+
+
+
+
+
+
+<% if @league.teams.count <18 %>
+	<strong>This league is not complete yet. Please add teams</strong>
+	<ul>
+		<% Team.all.each do |team| %>
+			<% unless @league.teams.include?(team) %>
+				<li><%= link_to team.name, "/leagues/1/add/#{team.id}" %></li>
+			<% end %>
+		<% end %>
+	</ul>
+	<br>
+<% end %>
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>

@@ -1,0 +1,63 @@
+<h1>New Event
+<% unless @match==nil %>
+	for <br><strong><%= @match.team.name %> vs. <%= Team.find(@match.otherteam_id).name %></strong>
+<% end %>
+</h1>
+
+<%= form_for(@correction) do |f| %>
+  <% if @correction.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@correction.errors.count, "error") %> prohibited this correction from being saved:</h2>
+
+	  <ul>
+	  <% @correction.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+	  <% end %>
+	  </ul>
+	</div>
+  <% end %>
+
+  <div class="field">
+	<%= f.label :name %><br>
+	<%= f.text_field :name %>
+  </div>
+  <div class="field">
+	<%= f.label :link %><br>
+	<%= f.text_field :link %>
+  </div>
+
+  <% unless @match==nil %>
+	<div class="field" style="display:none">
+		<%= f.label :match_id %><br>
+		<%= f.number_field :match_id, :value => @match.id %>
+	</div>
+  <% else %>
+	<div class="field">
+		We highly recommend using the match view to reach this page. You're welcome to manually input match id, but beware of mistakes.
+		<%= f.label :match_id %><br>
+		<%= f.number_field :match_id %>
+	</div>
+  <% end %>
+
+  <div class="field">
+	<%= f.label :typeOfCorrection %><br>
+	<%= f.select :typeOfCorrection, [["Goal", 0], ["Referee Mistake", 1], ["Clear Chance", 2], ["Luck", 3]] %>
+  </div>
+  <div class="field">
+	<%= f.label :change %><br>
+	<%= f.select :change, [["#{@match.team.name} +1", 10], ["#{@match.team.name} -1", -10], ["#{Team.find(@match.otherteam_id).name} +1", 1], ["#{Team.find(@match.otherteam_id).name} -1", -1]] %>
+  </div>
+  <div class="field">
+	<%= f.label :minute %><br>
+	<%= f.number_field :minute, :min => 0 %>
+  </div>
+
+  <div class="actions">
+	<%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', corrections_path %>
+
+  
+  
